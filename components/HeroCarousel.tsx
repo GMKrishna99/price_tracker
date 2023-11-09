@@ -14,7 +14,25 @@ const heroImages = [
 const HeroCarousel = () => {
     return (
         <div>
-           
+            <Carousel
+                showThumbs={false}
+                autoPlay
+                infiniteLoop
+                interval={2000}
+                showArrows={false}
+                showStatus={false}
+            >
+                {heroImages.map((image) => (
+                    <Image
+                        className="object-contain"
+                        src={image.imgUrl}
+                        alt={image.alt}
+                        width={484}
+                        height={484}
+                        key={image.alt}
+                    />
+                ))}
+            </Carousel>
         </div>
     )
 }
