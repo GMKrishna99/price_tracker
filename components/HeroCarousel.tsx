@@ -2,6 +2,7 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import Image from "next/image";
+import HandDrawnSVG from '@/public/assets/icons/hand-drawn-arrow.svg'
 
 const heroImages = [
     { imgUrl: '/assets/images/hero-1.svg', alt: 'smart watch' },
@@ -33,6 +34,13 @@ const HeroCarousel = () => {
                     />
                 ))}
             </Carousel>
+            <Image
+                src={HandDrawnSVG}
+                alt="hand drawn arrow"
+                width={175}
+                height={175}
+                className="max-xl:hidden absolute -left-[15%] bottom-0 z-0"
+            />
         </div>
     )
 }
