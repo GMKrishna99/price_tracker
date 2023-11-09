@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import ArrowRight from '@/public/assets/icons/arrow-right.svg'
 import Searchbar from '@/components/Searchbar'
+import HeroCarousel from '@/components/HeroCarousel'
 
 
 
@@ -22,7 +23,7 @@ const page = () => {
             <p className='mt-6'>Powerful,self-serve product and growth analytics to help you convert, engage and retain more</p>
             <Searchbar />
           </div>
-          HeroCarousel
+          <HeroCarousel />
         </div>
       </section>
       <section className='trending-section'>
