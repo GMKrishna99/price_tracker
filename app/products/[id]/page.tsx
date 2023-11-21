@@ -12,6 +12,10 @@ import ShareSVG from '@/public/assets/icons/share.svg'
 import StarsSVG from '@/public/assets/icons/star.svg'
 import CommentSVG from '@/public/assets/icons/comment.svg'
 import PriceTagSVG from '@/public/assets/icons/price-tag.svg'
+import ChareSVG from '@/public/assets/icons/chart.svg'
+import ArrowUpSVG from '@/public/assets/icons/arrow-up.svg'
+import ArrowDownSVG from '@/public/assets/icons/arrow-down.svg'
+import bagSVG from '@/public/assets/icons/bag.svg'
 
 type Props = {
     params: { id: string }
@@ -102,16 +106,55 @@ const ProductDetails = async ({ params: { id } }: Props) => {
                     </div>
                     <div className="my-7 flex flex-col gap-5">
                         <div className="flex gap-5 flex-wrap">
+                            {/* current Price */}
                             <PriceInfoCard
                                 title='Current Price'
                                 iconSrc={PriceTagSVG}
                                 value={`${product.currency} ${formatNumber(product.currentPrice)}`}
-                                borderColor="#b6dbff"
+                            />
+                            {/*  Average Price */}
+                            <PriceInfoCard
+                                title='Average Price'
+                                iconSrc={ChareSVG}
+                                value={`${product.currency} ${formatNumber(product.averagePrice)}`}
+                            />
+                            {/* Current Price */}
+                            <PriceInfoCard
+                                title='Current Price'
+                                iconSrc={ArrowUpSVG}
+                                value={`${product.currency} ${formatNumber(product.currentPrice)}`}
+                            />
+                            {/* lowest Price */}
+                            <PriceInfoCard
+                                title='lowest Price'
+                                iconSrc={ArrowDownSVG}
+                                value={`${product.currency} ${formatNumber(product.lowestPrice)}`}
                             />
                         </div>
                     </div>
+                    {/* modal */}
                 </div>
             </div>
+            {/* product description */}
+            <div className="flex flex-col gap-16">
+                <div className="flex flex-col gap-5">
+                    <h3 className="text-2xl text-secondary font-semibold">Product Description</h3>
+                    <div className="flex flex-col gap-4">
+                        {product?.description.split('\n')}
+                    </div>
+                </div>
+                <button className="btn w-fit mx-auto flex items-center justify-center gap-3 min-w-[200px">
+                    <Image
+                        src={bagSVG}
+                        alt="bag"
+                        width={22}
+                        height={22}
+                    />
+                    <Link href='/' className="text-base text-white">Buy Now</Link>
+                </button>
+            </div>
+            {/* some products */}
+            
         </div>
     )
 }
