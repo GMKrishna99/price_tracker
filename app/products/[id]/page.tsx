@@ -105,7 +105,7 @@ const ProductDetails = async ({ params: { id } }: Props) => {
                             <PriceInfoCard
                                 title='Current Price'
                                 iconSrc={PriceTagSVG}
-                                vale={`${product.currency} ${formatNumber(product.currentPrice)}`}
+                                value={`${product.currency} ${formatNumber(product.currentPrice)}`}
                                 borderColor="#b6dbff"
                             />
                         </div>
