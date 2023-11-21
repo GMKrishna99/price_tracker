@@ -1,4 +1,4 @@
-import { getProductById } from "@/lib/actions"
+import { getProductById, getSimilarProducts } from "@/lib/actions"
 import Image from "next/image"
 import Link from "next/link"
 import { redirect } from "next/navigation"
@@ -16,6 +16,7 @@ import ChareSVG from '@/public/assets/icons/chart.svg'
 import ArrowUpSVG from '@/public/assets/icons/arrow-up.svg'
 import ArrowDownSVG from '@/public/assets/icons/arrow-down.svg'
 import bagSVG from '@/public/assets/icons/bag.svg'
+import ProductCard from "@/components/ProductCard"
 
 type Props = {
     params: { id: string }
@@ -24,6 +25,8 @@ type Props = {
 const ProductDetails = async ({ params: { id } }: Props) => {
     const product: Product = await getProductById(id);
     if (!product) redirect('/')
+    // similar products
+    const similarProducts = await getSimilarProducts(id)
     return (
         <div className="product-container">
             <div className="flex gap-28 xl:flex-row flex-col">
@@ -118,11 +121,11 @@ const ProductDetails = async ({ params: { id } }: Props) => {
                                 iconSrc={ChareSVG}
                                 value={`${product.currency} ${formatNumber(product.averagePrice)}`}
                             />
-                            {/* Current Price */}
+                            {/* Highest Price */}
                             <PriceInfoCard
-                                title='Current Price'
+                                title='Highest Price'
                                 iconSrc={ArrowUpSVG}
-                                value={`${product.currency} ${formatNumber(product.currentPrice)}`}
+                                value={`${product.currency} ${formatNumber(product.highestPrice)}`}
                             />
                             {/* lowest Price */}
                             <PriceInfoCard
@@ -153,7 +156,20 @@ const ProductDetails = async ({ params: { id } }: Props) => {
                     <Link href={product.url} target="_blank" className="text-base text-white">Buy Now</Link>
                 </button>
             </div>
-            {/* some products */}
+            {/* similar products */}
+            {similarProducts && similarProducts?.length > 0 && (
+                <div className="py-14 flex flex-col gap-2 w-full">
+                    <p className="section-text">Similar products</p>
+                    <div className="flex flex-wrap gap-10 mt-7 w-full">
+                        {similarProducts.map((product) => (
+                            <ProductCard
+                                key={product._id}
+                                product={product}
+                            />
+                        ))}
+                    </div>
+                </div>
+            )}
 
         </div>
     )
