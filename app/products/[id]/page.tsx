@@ -2,13 +2,16 @@ import { getProductById } from "@/lib/actions"
 import Image from "next/image"
 import Link from "next/link"
 import { redirect } from "next/navigation"
+import { Product } from "@/types"
+import { formatNumber } from "@/lib/utils"
+import PriceInfoCard from "@/components/PriceInfoCard"
+
 import HeartSVG from '@/public/assets/icons/red-heart.svg'
 import BookmarkSVG from '@/public/assets/icons/bookmark.svg'
 import ShareSVG from '@/public/assets/icons/share.svg'
 import StarsSVG from '@/public/assets/icons/star.svg'
 import CommentSVG from '@/public/assets/icons/comment.svg'
-import { Product } from "@/types"
-import { formatNumber } from "@/lib/utils"
+import PriceTagSVG from '@/public/assets/icons/price-tag.svg'
 
 type Props = {
     params: { id: string }
@@ -99,7 +102,12 @@ const ProductDetails = async ({ params: { id } }: Props) => {
                     </div>
                     <div className="my-7 flex flex-col gap-5">
                         <div className="flex gap-5 flex-wrap">
-
+                            <PriceInfoCard
+                                title='Current Price'
+                                iconSrc={PriceTagSVG}
+                                vale={`${product.currency} ${formatNumber(product.currentPrice)}`}
+                                borderColor="#b6dbff"
+                            />
                         </div>
                     </div>
                 </div>
