@@ -17,6 +17,7 @@ import ArrowUpSVG from '@/public/assets/icons/arrow-up.svg'
 import ArrowDownSVG from '@/public/assets/icons/arrow-down.svg'
 import bagSVG from '@/public/assets/icons/bag.svg'
 import ProductCard from "@/components/ProductCard"
+import Modal from "@/components/Modal"
 
 type Props = {
     params: { id: string }
@@ -136,6 +137,7 @@ const ProductDetails = async ({ params: { id } }: Props) => {
                         </div>
                     </div>
                     {/* modal */}
+                    <Modal />
                 </div>
             </div>
             {/* product description */}
