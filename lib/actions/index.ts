@@ -6,6 +6,7 @@ import { connectToDB } from "../mongoose";
 import { scrapeAmazonProduct } from "../scraper";
 import { getAveragePrice, getHighestPrice, getLowestPrice } from "../utils";
 import { revalidatePath } from "next/cache";
+import { generateEmailBody } from "../nodemailer";
 
 export async function scrapeAndStoreProduct(productUrl: string) {
   // check if it doesn't exist
