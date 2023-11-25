@@ -6,7 +6,7 @@ import { connectToDB } from "../mongoose";
 import { scrapeAmazonProduct } from "../scraper";
 import { getAveragePrice, getHighestPrice, getLowestPrice } from "../utils";
 import { revalidatePath } from "next/cache";
-import { generateEmailBody } from "../nodemailer";
+import { generateEmailBody, sendEmail } from "../nodemailer";
 
 export async function scrapeAndStoreProduct(productUrl: string) {
   // check if it doesn't exist
@@ -109,6 +109,8 @@ export async function addUserEmailToProduct(
       await product.save();
 
       const emailContent = generateEmailBody(product, "WELCOME");
+
+      await sendEmail(emailContent, [userEmail]);
     }
   } catch (error) {
     console.log(error);
