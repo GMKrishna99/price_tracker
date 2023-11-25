@@ -10,9 +10,8 @@ import { connectToDB } from "@/lib/mongoose";
 import Product from "@/lib/models/Product.model";
 import { scrapeAmazonProduct } from "@/lib/scraper";
 import { generateEmailBody, sendEmail } from "@/lib/nodemailer";
-import type { VercelRequest, VercelResponse } from "@vercel/node";
 
-export const maxDuration = 300; // 5 minutes
+export const maxDuration = 5;
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
@@ -90,9 +89,4 @@ export async function GET(request: Request) {
   } catch (error: any) {
     throw new Error(`Failed to get all products: ${error.message}`);
   }
-}
-
-export default function (request: VercelRequest, response: VercelResponse) {
-  const { name = "World" } = request.query;
-  response.send(`Hello ${name}!`);
 }
