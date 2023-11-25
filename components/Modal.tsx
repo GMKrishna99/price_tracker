@@ -6,9 +6,13 @@ import Image from 'next/image'
 import LogoSVG from '@/public/assets/icons/logo.svg'
 import CloseSVG from '@/public/assets/icons/x-close.svg'
 import MailSVG from '@/public/assets/icons/mail.svg'
+import { addUserEmailToProduct } from '@/lib/actions'
 
+interface Props {
+    productId: string
+}
 
-const Modal = () => {
+const Modal = ({ productId }: Props) => {
     let [isOpen, setIsOpen] = useState(false)
 
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -19,6 +23,7 @@ const Modal = () => {
         setIsSubmitting(true);
 
         // add user email to the product
+        await addUserEmailToProduct(productId, email)
         setIsSubmitting(false)
         setEmail('')
         closeModal()
